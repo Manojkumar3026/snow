@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snorel LIS3DH Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Snorel <span>LIS3DH Live Monitor</span></h1>
+    <div class="status"><i id="dot"></i><span id="statusText">Disconnected</span></div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <button id="connectBtn" class="primary">Connect to Snorel_LIS3DH</button>
+      <button id="disconnectBtn" disabled>Disconnect</button>
+      <button id="pauseBtn" disabled>Pause</button>
+      <button id="clearBtn">Clear</button>
+      <button id="csvBtn" disabled>Download CSV</button>
+    </section>
+
+    <p id="unsupported" class="warn" hidden>
+      Web Bluetooth is not available. Use Chrome or Edge (desktop/Android) and open this page via
+      <code>https://</code> or <code>http://localhost</code>.
+    </p>
+
+    <section class="cards">
+      <div class="card x"><label>X (g)</label><b id="vx">—</b></div>
+      <div class="card y"><label>Y (g)</label><b id="vy">—</b></div>
+      <div class="card z"><label>Z (g)</label><b id="vz">—</b></div>
+      <div class="card m"><label>Magnitude (g)</label><b id="vm">—</b></div>
+      <div class="card p"><label>Posture</label><b id="posture">—</b></div>
+      <div class="card v" id="vibCard"><label>Vibration</label><b id="vibState">—</b><small id="vibRms">RMS —</small></div>
+      <div class="card"><label>Samples</label><b id="count">0</b></div>
+      <div class="card"><label>Rate (Hz)</label><b id="rate">0</b></div>
+    </section>
+
+    <section class="panel">
+      <div class="legend">
+        <span class="x">● X</span><span class="y">● Y</span><span class="z">● Z</span>
+      </div>
+      <canvas id="chart" width="1000" height="360"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Vibration (RMS, m/s²) — dashed line = threshold</h2>
+      <canvas id="vibChart" width="1000" height="160"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Raw data</h2>
+      <pre id="log"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
